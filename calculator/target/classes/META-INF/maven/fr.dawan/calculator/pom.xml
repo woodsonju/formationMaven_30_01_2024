@@ -1,0 +1,201 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+
+	<!-- La version du format du fichier pom. -->
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- GAV : Identifiant unique du projet -->
+	<groupId>fr.dawan</groupId>
+	<artifactId>calculator</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<!-- Le type d'archive à generer -->
+	<packaging>jar</packaging>
+
+	<!-- Informations générales -->
+	<name>Projet calculatrice</name>
+	<description>Projet Calculator: Permettant d'effectuer plusieurs opérations mathématiques</description>
+	<!-- url du projet ou de l'application en production -->
+	<url>https:www.dawan.fr/calculator</url>
+
+	<!-- L'organisation -->
+	<organization>
+		<name>Dawan</name>
+		<url>https://www.dawan.fr</url>
+	</organization>
+
+	<!--Licences -->
+	<licenses>
+		<license>
+			<name>Apache Licence, Version 2.0</name>
+			<url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+	</licenses>
+
+	<!-- Team developpers -->
+	<developers>
+		<developer>
+			<name>Laurent</name>
+			<email>laurent@gmail.com</email>
+			<roles>
+				<role>Product Owner</role>
+			</roles>
+		</developer>
+	</developers>
+
+	<contributors>
+		<contributor>
+			<email>steven@gmail.com</email>
+			<organization>Ingenieur</organization>
+			<roles>
+				<role>Ingenieur Java Back End</role>
+			</roles>
+		</contributor>
+	</contributors>
+
+	<!-- Les propriétés -->
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
+
+		<!-- Definir la propriété pour la version de JUnit Jupiter -->
+		<junit.jupiter.version>5.10.1</junit.jupiter.version>
+	</properties>
+
+	<!-- Gestion des dépendances -->
+	<dependencies>
+
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>${junit.jupiter.version}</version>
+		</dependency>
+
+	</dependencies>
+
+
+
+	<!-- profile -->
+	<profiles>
+		<!-- Profile pour l'environnement de test -->
+		<profile>
+			<id>test</id>
+			<build>
+				<resources>
+					<resource>
+						<directory>src/main/resources/conf-test</directory>
+						<filtering>true</filtering>
+					</resource>
+				</resources>
+			</build>
+		</profile>
+		<!-- Profile pour l'environnement de test -->
+		<profile>
+			<id>prod</id>
+			<build>
+				<resources>
+					<resource>
+						<directory>src/main/resources/conf-prod</directory>
+						<filtering>true</filtering>
+					</resource>
+				</resources>
+			</build>
+		</profile>
+	</profiles>
+
+
+	<build>
+		<!-- <directory>${project.basedir}/output</directory> -->
+
+		<!-- <resources> -->
+		<!-- <resource> -->
+		<!-- <directory>src/main/resources</directory> -->
+		<!-- <filtering>true</filtering> -->
+		<!-- </resource> -->
+		<!-- </resources> -->
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.3.0</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>fr.dawan.calculator.App</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.7.1</version>
+				<configuration>
+					<!-- On veut le site en Français -->
+					<locales>fr</locales>
+				</configuration>
+			</plugin>
+
+		</plugins>
+
+	</build>
+
+	<!-- Gestion des rapport -->
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>2.7</version>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>index</report>
+							<report>summary</report>
+							<report>plugins</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+
+			<!-- Rapport sur les test -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+				<version>2.20</version>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>report</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+
+			<!-- Rapport sur la qualité du code -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>2.17</version>
+				<configuration>
+					<configLocation>src/build/checkstyle.xml</configLocation>
+					<linkXRef>false</linkXRef>
+				</configuration>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>checkstyle</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+
+		</plugins>
+	</reporting>
+
+</project>

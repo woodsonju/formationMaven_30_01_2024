@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator Result</title>
+
+    <!-- Inclure les fichiers CSS de Bootstrap via Webjars -->
+    <link rel="stylesheet" href="/webjars/bootstrap/5.1.3/css/bootstrap.min.css">
+
+    <!-- Facultatif : Vous pouvez inclure un fichier CSS personnalisé ici -->
+    <!-- <link rel="stylesheet" href="/path/to/custom.css"> -->
+</head>
+<body class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title">Result</h1>
+                    <div th:if="${error}" class="text-danger" th:text="${error}"></div>
+                    <div th:if="${result}" class="text-success" th:text="'Result: ' + ${result}"></div>
+                    <a href="/" class="btn btn-primary mt-3">Retourner à la calculatrice</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Optionnel : Vous pouvez inclure des fichiers JavaScript de Bootstrap ici -->
+    <!-- <script src="/webjars/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script> -->
+
+    <!-- Facultatif : Vous pouvez inclure des scripts JavaScript personnalisés ici -->
+    <!-- <script src="/path/to/custom.js"></script> -->
+</body>
